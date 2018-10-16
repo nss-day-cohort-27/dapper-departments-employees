@@ -29,15 +29,15 @@ namespace DapperDepartments
                 2. Convert result to list
                 3. Use ForEach to iterate the collection
             */
-            List<Department> departments = db.
-                Query<Department>(@"SELECT * FROM Department")
-                .ToList();
-            departments.ForEach(dept => Console.WriteLine($"{dept.DeptName}"));
+            // List<Department> departments = db.
+            //     Query<Department>(@"SELECT * FROM Department")
+            //     .ToList();
+            // departments.ForEach(dept => Console.WriteLine($"{dept.DeptName}"));
 
             // Chaining LINQ statements together
-            db.Query<Employee>(@"SELECT * FROM Employee")
-              .ToList()
-              .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName}"));
+            // db.Query<Employee>(@"SELECT * FROM Employee")
+            //   .ToList();
+            //   .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName}"));
 
 
 
@@ -64,8 +64,8 @@ namespace DapperDepartments
                 generatedEmployee.Department = generatedDepartment;
                 return generatedEmployee;
             })
-            .ToList()
-            .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName} works in the {emp.Department.DeptName} department"));
+            .ToList();
+            // .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName} works in the {emp.Department.DeptName} department"));
 
 
             /*
@@ -97,8 +97,15 @@ namespace DapperDepartments
 
             foreach (KeyValuePair<string, List<Employee>> reportItem in report)
             {
-               Console.WriteLine($"{reportItem.Key} has {reportItem.Value.Count} employeees");
+               Console.Write($@"{reportItem.Key} has the following employees");
+
+               foreach (Employee employee in reportItem.Value)
+               {
+                   Console.Write($@", {employee.FirstName} {employee.LastName}");
+               }
+                Console.WriteLine("");
             }
+
 
 
         }
